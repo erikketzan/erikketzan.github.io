@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erik Ketzan — Digital Humanities</title>
+  <meta name="description" content="Erik Ketzan — Lecturer in Digital Humanities and Cultural Computation, King's College London. Publications, presentations, and research in computational literary studies and research data ethics.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #ffffff;
+      --bg-card:      #f5f5f5;
+      --text:         #1a1a1a;
+      --text-muted:   #666666;
+      --accent:       #1a3d35;
+      --accent-mid:   #2c6b5a;
+      --border:       #d8d8d8;
+      --border-light: #e8e8e8;
+
+      --serif:  'Inter', system-ui, -apple-system, sans-serif;
+      --display:'Inter', system-ui, -apple-system, sans-serif;
+      --mono:   'IBM Plex Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+      transition: color 0.15s ease;
+    }
+    a:hover { color: var(--accent-mid); }
+
+    /* ─── HEADER ──────────────────────────────────── */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem 2.75rem;
+      text-align: center;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .site-header h1 {
+      font-family: var(--display);
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 0.6rem;
+    }
+
+    .site-header .tagline {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .site-nav {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.2rem 0.1rem;
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .site-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.15rem 0.7rem;
+      border-radius: 2px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .site-nav a:hover { color: var(--accent); background: var(--bg-card); }
+    .site-nav .sep { color: var(--border); }
+
+    /* ─── MAIN ────────────────────────────────────── */
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 7rem;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 4rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .about-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .about-photo {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--border);
+    }
+
+    .contact-links--photo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+    }
+
+    .about-text p + p { margin-top: 1rem; }
+
+    /* ─── SECTIONS ────────────────────────────────── */
+    section {
+      margin-bottom: 3.25rem;
+      animation: fadeUp 0.55s ease both;
+    }
+
+    section h2 {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.6rem;
+    }
+
+    /* ─── PUB LISTS ───────────────────────────────── */
+    .pub-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .pub-list li {
+      padding-left: 1.1rem;
+      border-left: 2px solid var(--border-light);
+      font-size: 0.96rem;
+      line-height: 1.65;
+      transition: border-color 0.15s;
+    }
+    .pub-list li:hover { border-left-color: var(--accent-mid); }
+
+    .pub-list li.award { border-left-color: var(--accent); }
+
+    .pub-award {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 0.25rem;
+    }
+    .pub-award::before { content: "⭑  "; }
+
+    .pub-links {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0 0.7rem;
+      margin-left: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      vertical-align: baseline;
+    }
+
+    .pub-links a {
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 0.05em;
+    }
+
+    /* ─── MONOGRAPH ───────────────────────────────── */
+    .monograph-block {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2.2rem;
+      align-items: start;
+    }
+
+    .monograph-cover {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--border);
+      box-shadow: 3px 5px 16px rgba(0,0,0,0.10);
+      transition: box-shadow 0.2s;
+    }
+    .monograph-cover:hover { box-shadow: 3px 7px 22px rgba(0,0,0,0.16); }
+
+    .monograph-title {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.05rem;
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .monograph-imprint {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .monograph-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.2rem 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+    .monograph-links a {
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 0.05em;
+    }
+
+    .blurbs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .blurb {
+      background: var(--bg-card);
+      border-left: 3px solid var(--border);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .blurb p { font-style: italic; }
+    .blurb cite {
+      display: block;
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-top: 0.45rem;
+    }
+
+    /* ─── CONTACT ─────────────────────────────────── */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2.5rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+    }
+    .contact-links a {
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 0.1em;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────── */
+    @keyframes fadeIn  { from { opacity: 0; }                          to { opacity: 1; } }
+    @keyframes fadeUp  { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 580px) {
+      .about-grid       { grid-template-columns: 1fr; }
+      .about-photo      { max-width: 150px; }
+      .monograph-block  { grid-template-columns: 1fr; }
+      .monograph-cover  { max-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════════════ -->
+<header class="site-header">
+  <h1>Erik Ketzan</h1>
+  <p class="tagline">Digital Humanities &nbsp;·&nbsp; Computational Literary Studies &nbsp;·&nbsp; Legal &amp; Ethical Issues in Research Data</p>
+  <nav class="site-nav" aria-label="Page sections">
+    <a href="#about">About</a><span class="sep">/</span>
+    <a href="#monograph">Monograph</a><span class="sep">/</span>
+    <a href="#chapters">Book Chapters</a><span class="sep">/</span>
+    <a href="#journals">Journals</a><span class="sep">/</span>
+    <a href="#conferences">Conference Papers</a><span class="sep">/</span>
+    <a href="#workshops">Workshops</a><span class="sep">/</span>
+    <a href="#whitepapers">White Papers</a><span class="sep">/</span>
+    <a href="#presentations">Presentations</a><span class="sep">/</span>
+    <a href="#committees">Committees</a>
+  </nav>
+</header>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════ -->
+<main class="main">
+
+  <!-- ABOUT -->
+  <section id="about" aria-label="About">
+    <div class="about-grid">
+      <div class="about-left">
+        <img class="about-photo"
+             src="img/profile_picture.jpg"
+             alt="Erik Ketzan">
+        <div class="contact-links contact-links--photo">
+          <a href="https://www.kcl.ac.uk/people/erik-ketzan" target="_blank" rel="noopener">Academic profile</a>
+          <a href="https://scholar.google.co.uk/citations?user=O20i8mMAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://twitter.com/erikketzan" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://orcid.org/0000-0003-0264-2157" target="_blank" rel="noopener">ORCID</a>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>Dr. Erik Ketzan is Lecturer (~Assistant Professor) in Digital Humanities and Cultural Computation at <a href="https://www.kcl.ac.uk/ddh">King's College London, Department of Digital Humanities</a>. Erik publishes and teaches on computational approaches to literary and historical texts, as well as legal and ethical issues in research data and research infrastructures.</p>
+        <p>Erik completed a PhD in English/Digital Humanities at <a href="http://www.bbk.ac.uk">Birkbeck, University of London</a> in 2020, focusing on computational approaches to style in postmodern literature, then worked as a Postdoctoral Researcher at the <a href="https://dh.phil-fak.uni-koeln.de/">University of Cologne, Department of Digital Humanities</a> (project: <a href="https://encycnet.github.io">"EncycNet: A Historical Encyclopedia Knowledge Graph"</a>), creating a knowledge graph (a nodes-and-edges network) of encyclopedias from the 18th–20th centuries using natural language processing, neural network/machine learning/AI classification, and semantic web annotation. Erik then worked two years as a Postdoctoral Research and Teaching Fellow at <a href="https://dh.tcd.ie/dh/">Trinity College Dublin, Centre for Digital Humanities</a>, as well as Coordinator (deputy director) of the <a href="https://dh.tcd.ie/dh/teaching/">Masters Degree in Digital Humanities and Culture</a> at Trinity. Prior to his PhD, Erik worked as an academic researcher in the Computational Linguistics and Research Infrastructure departments of the <a href="http://www1.ids-mannheim.de">Leibniz Institute for the German Language</a> (Mannheim, Germany), and <a href="https://www.clarin.eu">CLARIN</a> – European Research Infrastructure for Language Resources and Technology, focusing on legal and ethical issues in research data.</p>
+      </div><!-- /.about-text -->
+    </div><!-- /.about-grid -->
+  </section>
+
+  <!-- MONOGRAPH -->
+  <section id="monograph">
+    <h2>Monograph</h2>
+    <div class="monograph-block">
+      <a href="https://www.bloomsburycollections.com/monograph?docid=b-9781350211865" target="_blank" rel="noopener">
+        <img class="monograph-cover"
+             src="img/ketzan-pynchon-cover.jpg"
+             alt="Thomas Pynchon and the Digital Humanities — book cover">
+      </a>
+      <div>
+        <p class="monograph-title">Thomas Pynchon and the Digital Humanities: Computational Approaches to Style</p>
+        <p class="monograph-imprint">Bloomsbury, 2022</p>
+        <div class="monograph-links">
+          <a href="https://www.bloomsbury.com/uk/thomas-pynchon-and-the-digital-humanities-9781350211834/" target="_blank" rel="noopener">Bloomsbury</a>
+          <a href="https://www.amazon.com/Thomas-Pynchon-Digital-Humanities-Computational/dp/1350211834/" target="_blank" rel="noopener">Amazon US</a>
+          <a href="https://www.amazon.co.uk/Thomas-Pynchon-Digital-Humanities-Computational/dp/1350211834/" target="_blank" rel="noopener">Amazon UK</a>
+          <a href="https://www.bloomsburycollections.com/monograph?docid=b-9781350211865" target="_blank" rel="noopener">Open Access</a>
+        </div>
+        <div class="blurbs">
+          <blockquote class="blurb">
+            <p>"A landmark contribution to Pynchon Studies."</p>
+            <cite>Prof. Luc Herman, University of Antwerp. Co-Editor, <em>The Cambridge Companion to Thomas Pynchon</em></cite>
+          </blockquote>
+          <blockquote class="blurb">
+            <p>"You can count on these findings percolating through the Pynchon scholarship over the course of the next few years. I'm sure that in future no-one will want to venture claims about Pynchon's style without first checking to see what Ketzan has discovered."</p>
+            <cite>Prof. Brian McHale, The Ohio State University. Author, <em>Postmodernist Fiction</em></cite>
+          </blockquote>
+          <blockquote class="blurb">
+            <p>"A breakthrough study of the role that computational approaches to literature can play in the analysis of Pynchon's works. Ketzan combines close and distant reading in truly compelling ways."</p>
+            <cite>Associate Prof. Samuel Thomas, Durham University. Author, <em>Pynchon and the Political</em></cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK CHAPTERS -->
+  <section id="chapters">
+    <h2>Book Chapters</h2>
+    <ul class="pub-list">
+      <li>
+        Erik Ketzan and Pawel Kamocki, "<strong>Digital Humanities Research Under United States and European Copyright Laws: Evolving Frameworks</strong>", in <a href="https://www.routledge.com/Access-and-Control-in-Digital-Humanities/Hawkins/p/book/9781032004396"><em>Access and Control in Digital Humanities</em></a> (Routledge, 2021).
+        <span class="pub-links">
+          <a href="https://ids-pub.bsz-bw.de/frontdoor/index/index/docId/10443" target="_blank" rel="noopener">Post-print</a>
+        </span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PEER-REVIEWED JOURNALS -->
+  <section id="journals">
+    <h2>Peer-Reviewed Journals</h2>
+    <ul class="pub-list">
+      <li>
+        Erik Ketzan, "<strong>A Bibliometric Overview of Pynchon Studies: Introducing the Thomas Pynchon Online Bibliography (TPOB)</strong>", <em>Orbit: A Journal of American Literature</em> 12:1 (2025).
+        <span class="pub-links"><a href="https://doi.org/10.16995/orbit.23348" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Review: <em>Computational Drama Analysis: Reflecting on Methods and Interpretations</em></strong>", <em>German Studies Review</em> 48:1 (2025).
+        <span class="pub-links"><a href="https://doi.org/10.1353/gsr.2025.a951988" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Erik Ketzan and Martin Eve, "<strong>The Anxiety of Prestige in Stephen King's Stylistics</strong>", <em>Journal of Computational Literary Studies</em> 3:1 (2024).
+        <span class="pub-links"><a href="https://doi.org/10.48694/jcls.3915" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Review: <em>Modes of Composition and the Durability of Style in Literature</em> by David L. Hoover</strong>", <em>Digital Scholarship in the Humanities</em> (2024).
+        <span class="pub-links"><a href="https://doi.org/10.1093/llc/fqad105" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Erik Ketzan, Jennifer Edmond, and Carl Vogel, "<strong>Need a Good Book about Privacy? Evaluating Dictionary-Based Corpus Query for Detecting the Topic of Privacy in Literary Texts</strong>", <em>Journal of Computational Literary Studies</em> 2:1, 1–19 (2023).
+        <span class="pub-links"><a href="https://doi.org/10.48694/jcls.3602" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Review of <em>Pynchon's Sound of Music</em></strong>", <em>Orbit: A Journal of American Literature</em> 10:2 (2022).
+        <span class="pub-links"><a href="https://orbit.openlibhums.org/article/id/9637/" target="_blank" rel="noopener">Link</a></span>
+      </li>
+      <li>
+        Erik Ketzan and Christof Schöch, "<strong>Classifying and Contextualizing Edits in Variants with Coleto: Three Versions of Andy Weir's <em>The Martian</em></strong>", <em>Digital Humanities Quarterly</em> 15:4 (2021).
+        <span class="pub-links"><a href="http://www.digitalhumanities.org/dhq/vol/15/4/000579/000579.html" target="_blank" rel="noopener">Link</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Clash of the Modern/Postmodern Titans? James Joyce in <em>Gravity's Rainbow</em></strong>", <em>English Studies</em> 101:3 (2020), 333–356.
+        <span class="pub-links"><a href="https://doi.org/10.1080/0013838X.2020.1727176" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Michael Berskens, Pawel Kamocki, and Erik Ketzan, "<strong>Implied Consent – A Silent Revolution in Digital Copyright Law. US, German and French Perspectives</strong>", <em>Revue Internationale du Droit d'Auteur</em> 238, 2–109 (2013). <span style="font-size:0.85em;color:var(--text-muted)">[available in English, French, and Spanish]</span>
+        <span class="pub-links"><a href="http://www.la-rida.com/en/article-rida-en/2116?lang=en#download" target="_blank" rel="noopener">Link</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Pynchon Nods: Proust in <em>Gravity's Rainbow</em></strong>", <em>Orbit: A Journal of American Literature</em> 1:1 (2012).
+        <span class="pub-links"><a href="http://doi.org/10.7766/orbit.v1.1.30" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Rebuilding Babel: Copyright and the Future of Online Machine Translation</strong>", <em>Tulane Journal of Technology &amp; Intellectual Property</em> 205 (2007).
+        <span class="pub-links"><a href="http://heinonline.org/HOL/LandingPage?handle=hein.journals/tuljtip9&amp;div=8&amp;id=&amp;page=" target="_blank" rel="noopener">Link</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CONFERENCE PAPERS -->
+  <section id="conferences">
+    <h2>Conference Papers (Peer-reviewed)</h2>
+    <ul class="pub-list">
+      <li>
+        Thora Hagen and Erik Ketzan, "<strong>Introducing Traveling Word Pairs in Historical Semantic Change: A Case Study of Privacy Words in 18th and 19th Century English</strong>", Fourth Conference on Computational Humanities Research, EPITA, Paris, December 6–8, 2023.
+        <span class="pub-links"><a href="https://ceur-ws.org/Vol-3558/paper5360.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Thora Hagen, Leonard Konle, Erik Ketzan, Fotis Jannidis, and Andreas Witt, "<strong>Tracing the Shift to 'Objectivity' in German Encyclopedias of the Long Nineteenth Century</strong>", DH2023, Graz, Austria, July 10–14, 2023.
+        <!-- UPDATE THIS PATH after committing the PDF to the repo -->
+        <span class="pub-links"><a href="pdf/Hagen_et_al_Tracing_the_Shift_of_Objectivity.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li class="award">
+        Erik Ketzan and Nicolas Werner, "<strong>'Entrez!' she called: Evaluating Language Identification Tools in English Literary Texts</strong>", Third Conference on Computational Humanities Research, University of Antwerp, Belgium, 12–14 December 2022.
+        <span class="pub-links"><a href="https://ceur-ws.org/Vol-3290/short_paper9153.pdf" target="_blank" rel="noopener">PDF</a></span>
+        <span class="pub-award">Highly Commended Paper Award, CHR2022</span>
+      </li>
+      <li>
+        Erik Ketzan, Thora Hagen, Fotis Jannidis, and Andreas Witt, "<strong>Quantitative Analysis of Gendered Assumptions in a Nineteenth-Century Women's Encyclopedia</strong>", DH2022, The University of Tokyo, 25–29 July 2022.
+        <!-- UPDATE THIS PATH after committing the PDF to the repo -->
+        <span class="pub-links"><a href="pdf/Ketzan_et_al_Gendered_Assumptions.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Andreas van Cranenburgh and Erik Ketzan, "<strong>Stylometric Literariness Classification: the Case of Stephen King</strong>", 2021 Conference on Empirical Methods in Natural Language Processing, Proceedings of the 5th Joint SIGHUM Workshop on Computational Linguistics for Cultural Heritage, Social Sciences, Humanities and Literature, Punta Cana, Dominican Republic, November 11, 2021.
+        <span class="pub-links"><a href="https://aclanthology.org/2021.latechclfl-1.21/" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Thora Hagen, Erik Ketzan, Fotis Jannidis and Andreas Witt, "<strong>Twenty-Two Historical Encyclopedias Encoded in TEI: A New Resource for the Digital Humanities</strong>", LaTeCH-CLfL 2020: 4th Joint SIGHUM Workshop on Computational Linguistics for Cultural Heritage, Social Sciences, Humanities and Literature, December 2020.
+        <span class="pub-links"><a href="https://www.aclweb.org/anthology/2020.latechclfl-1.13/" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Should Digital Humanities Consult an Oracle for 'The Copyright Case of the Decade'?</strong>", Workshop: Copyright and Humanities Research: A Global Perspective, DH2019, Utrecht, Netherlands, 8 July 2019.
+      </li>
+      <li>
+        Pawel Kamocki, Erik Ketzan, Julia Wildgans, Andreas Witt, "<strong>Toward a CLARIN Data Protection Code of Conduct</strong>", CLARIN Annual Conference 2018, Pisa, 8–10 October 2018.
+        <span class="pub-links"><a href="https://office.clarin.eu/v/CE-2018-1292-CLARIN2018_ConferenceProceedings.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Pawel Kamocki, Erik Ketzan, Julia Wildgans, Andreas Witt, "<strong>New exceptions for Text and Data Mining and their possible impact on the CLARIN infrastructure</strong>", Selected papers from the CLARIN Annual Conference 2018, Pisa, 8–10 October 2018.
+        <span class="pub-links"><a href="http://www.ep.liu.se/ecp/159/ecp18159.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Pawel Kamocki, Erik Ketzan, Julia Wildgans, Andreas Witt, "<strong>Das neue "Gesetz zur Angleichung des Urheberrechts an die aktuellen Erfordernisse der Wissensgesellschaft" und seine Auswirkungen für Digital Humanities</strong>" ("The new German research exception for copyright and what it means for digital humanities"), DHd2018 Annual Conference, Book of Abstracts, pp. 156–58, February 26 – March 2, 2018.
+        <span class="pub-links"><a href="http://dhd2018.uni-koeln.de/wp-content/uploads/boa-DHd2018-web-ISBN.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Aleksei Kelli, Krister Lindén, Kadri Vider, Penny Labropoulou and Erik Ketzan, "<strong>Implementation of an Open Science Policy in the context of management of CLARIN language resources: a need for changes?</strong>", CLARIN2017 Annual Conference, Book of Abstracts, September 18–20, 2017.
+        <span class="pub-links"><a href="https://www.clarin.eu/sites/default/files/Kelli-etal-CLARIN2017_paper_27.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Erik Ketzan and Christof Schöch, "<strong>What Changed When Andy Weir's <em>The Martian</em> Got Edited?</strong>", Digital Humanities 2017, Conference Book of Abstracts (Montréal: McGill University &amp; Université de Montréal, 2017).
+        <span class="pub-links"><a href="https://doi.org/10.5281/zenodo.841358" target="_blank" rel="noopener">DOI</a></span>
+      </li>
+      <li>
+        Pawel Kamocki, Erik Ketzan, and Andreas Witt, "<strong>Lizenzauswahlwerkzeuge für die digitalen Geisteswissenschaften</strong>" ("Automatic License Choosers for Digital Humanities"), DHd 2016, Conference Abstracts, University of Leipzig (Duisburg: Nisaba, 2016), 336–337.
+        <span class="pub-links"><a href="https://ids-pub.bsz-bw.de/files/5682/Kamocki_Ketzan_Witt_Lizenzauswahlwerkzeuge_fuer_die_digitalen_Geisteswissenschaften_2016.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Erik Ketzan and Pawel Kamocki, "<strong>Legal and Ethical Aspects of Authorship Attribution Using Stylometry – EU and US Perspectives</strong>", Digital Humanities 2016: Conference Abstracts. Jagiellonian University &amp; Pedagogical University, Kraków, pp. 104–108.
+        <span class="pub-links"><a href="http://dh2016.adho.org/abstracts/246" target="_blank" rel="noopener">Link</a></span>
+      </li>
+      <li>
+        Erik Ketzan, "<strong>Literary Wikis: Crowd-sourcing the Analysis and Annotation of Pynchon, Eco and Others</strong>", Digital Humanities 2012 Conference Abstracts (Hamburg: Hamburg University Press, 2012), 252–54.
+        <span class="pub-links"><a href="http://www.dh2012.uni-hamburg.de/wp-content/uploads/2012/07/HamburgUP_dh2012_BoA.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>
+        Piotr Bański, Peter M Fischer, Elena Frick, Erik Ketzan, Marc Kupietz, Carsten Schnober, Oliver Schonefeld, Andreas Witt, "<strong>The New IDS Corpus Analysis Platform: Challenges and Prospects</strong>", Proceedings of the Eighth International Conference on Language Resources and Evaluation (LREC 2012).
+        <span class="pub-links"><a href="http://ai2-s2-pdfs.s3.amazonaws.com/69cb/9be9c7a7544f7758f24eaa58a57f82a5eb09.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- WORKSHOPS -->
+  <section id="workshops">
+    <h2>Workshops / Seminars / Panels</h2>
+    <ul class="pub-list">
+      <li>Panel Co-organizers: Erik Ketzan and Kim Nayyer. "<strong>Legal Issues in Digital Humanities: Analysis of Recent Advocacy and Continuing and Emerging Issues.</strong>" DH2023, Graz, Austria, July 10–14, 2023.</li>
+      <li>Lecturer, Workshop: "<strong>Legal, Ethical and Practical issues of data scraping in the humanities</strong>", Trinity College Dublin, Centre for Digital Humanities, February 16, 2022.</li>
+      <li>Lecturer, Workshop: "<strong>Working with Digital Text Corpora</strong>", Trinity College Dublin, Centre for Digital Humanities, October 14, 2021.</li>
+      <li>Seminar Organiser, "<strong>Close Reading + Digital Humanities: A Dialogue</strong>", Birkbeck, University of London, April 20, 2018. Supported by <a href="http://www.bbk.ac.uk/arts/research/research-bursaries-studentships-funding/the-lorraine-lim-postgraduate-fund">The Lorraine Lim Postgraduate Fund</a>.</li>
+      <li>Program Committee (Khalid Choukri, Pawel Kamocki, Erik Ketzan, Stelios Piperidis, Prodromos Tsiavos, Andreas Witt), <strong>LREC 2018: Legal Issues Workshop</strong> – Miyazaki, Japan – 8 May, 2018.</li>
+      <li>Program Committee (Khalid Choukri, Erik Ketzan, Stelios Piperidis, Prodromos Tsiavos, Andreas Witt), <strong>LREC 2016: Legal Issues Workshop</strong>, Portorož, Slovenia, May 24, 2016.
+        <span class="pub-links"><a href="http://www.elra.info/en/dissemination/elra-events/legal-issues-workshop-lrec2016/" target="_blank" rel="noopener">Link</a></span>
+      </li>
+      <li>Program Committee (Erik Ketzan, Prodromos Tsiavos, Khalid Choukri), <strong>LREC 2014: Legal Issues in Language Resources and Infrastructures Workshop</strong> – Reykjavik, Iceland – 27 May, 2014.
+        <span class="pub-links"><a href="http://lrec2014.lrec-conf.org/media/filer_public/2014/05/26/legal_workshop_updated_program.pdf" target="_blank" rel="noopener">Link</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- FUNDING ORG GUIDELINES -->
+  <section id="guidelines">
+    <h2>Funding Organization Best Practice Guidelines</h2>
+    <ul class="pub-list">
+      <li>Roundtable authorship, DFG (<em>Deutsche Forschungsgemeinschaft</em>, German Research Foundation), "<strong>Guidelines for Building Language Corpora Under German Law: Guidelines by the DFG Review Board on Linguistics</strong>", CLARIN Legal Issues Committee White Paper Series, 2017. Translation from German to English by Erik Ketzan, Julia Wildgans, and John Weitzmann.
+        <span class="pub-links"><a href="https://www.clarin.eu/sites/default/files/CLIC_White_Paper_2_0.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>Roundtable authorship, DFG (<em>Deutsche Forschungsgemeinschaft</em>, German Research Foundation), "<strong>Information on Legal Issues for the Handling of Language Corpora</strong>" (Informationen zu rechtlichen Aspekten bei der Handhabung von Sprachkorpora), 2015.
+        <span class="pub-links"><a href="https://www.dfg.de/download/pdf/foerderung/grundlagen_dfg_foerderung/informationen_fachwissenschaften/geisteswissenschaften/standards_recht.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- WHITE PAPERS -->
+  <section id="whitepapers">
+    <h2>White Papers</h2>
+    <ul class="pub-list">
+      <li>Pawel Kamocki, Erik Ketzan, Julia Wildgans, "<strong>Language Resources and Research Under the General Data Protection Regulation</strong>", CLARIN Legal Issues Committee White Paper Series, 2018.
+        <span class="pub-links"><a href="https://www.clarin.eu/sites/default/files/CLIC_White_Paper_3.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>Erik Ketzan et al., "<strong>Guidelines for Building Language Corpora Under German Law: Guidelines by the DFG Review Board on Linguistics</strong>", CLARIN Legal Issues Committee White Paper Series, 2017.
+        <span class="pub-links"><a href="https://www.clarin.eu/sites/default/files/CLIC_White_Paper_2_0.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+      <li>Pawel Kamocki and Erik Ketzan, "<strong>Creative Commons and Language Resources: General Issues and What's New in CC 4.0</strong>", CLARIN Legal Issues Committee White Paper Series, 2014.
+        <span class="pub-links"><a href="http://www.clarin-d.de/images/legal/CLIC_white_paper_1.pdf" target="_blank" rel="noopener">PDF</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- WEBSITES -->
+  <section id="websites">
+    <h2>Websites</h2>
+    <ul class="pub-list">
+      <li>Pawel Kamocki and Erik Ketzan, <a href="https://www.clarin.eu/content/legal-information-platform" target="_blank" rel="noopener">CLARIN Legal Information Platform</a></li>
+      <li>Tim Ware and Erik Ketzan, Co-Architects, <a href="http://pynchonwiki.com" target="_blank" rel="noopener">Pynchonwiki.com</a></li>
+    </ul>
+  </section>
+
+  <!-- SELECT PRESENTATIONS -->
+  <section id="presentations">
+    <h2>Select Presentations</h2>
+    <ul class="pub-list">
+      <li>Erik Ketzan, "<strong>How AI Can Accelerate Bibliometrics in the Humanities</strong>", Queen Mary University of London, School of Arts, Postgraduate Research Seminar (PGRS), April 16, 2026.</li>
+      <li>Erik Ketzan, "<strong>Close and Distant Reading: Observations and Predictions</strong>", Close Reading in the Digital World conference, University College London (UCL), June 10, 2024.</li>
+      <li>Erik Ketzan, "<strong>The EU AI Act's Potential Impact on Digital Humanities: Initial Observations</strong>", DH2023, Graz, Austria, July 14, 2023.</li>
+      <li>Erik Ketzan, "<strong>The Other Side of The Great Divide: The Anxiety of Prestige in Popular Fiction</strong>", School of English Staff-Postgraduate Seminar Series, Trinity College Dublin, April 4, 2023.</li>
+      <li>Erik Ketzan, "<strong>Corpus Query with LancsBox: A Crash Course</strong>", guest lecture, Comparative Literary Studies, Theory and Methodology, Trinity College Dublin, March 20, 2023.</li>
+      <li>Erik Ketzan, "<strong>Digital Humanities Tools: A Crash Course</strong>", guest lecture, Comparative Literary Studies, Theory and Methodology, Trinity College Dublin, March 22, 2022.</li>
+      <li>Erik Ketzan, "<strong>Working with Text Corpora</strong>", Digital Scholarship &amp; Skills Workshop Series, Trinity College Dublin, October 14, 2021.</li>
+      <li>Erik Ketzan, "<strong>Legal Issues in Digital Scholarly Editing</strong>", University of Cologne, Germany, Master's course Editionswissenschaft, January 28, 2021.</li>
+      <li>Erik Ketzan, "<strong>Copyright Issues in Digital Humanities Research</strong>", University of Cologne, Germany, a.r.t.e.s. Graduate School Workshop on Research Data Management, December 16, 2020.</li>
+      <li>Erik Ketzan und Thora Hagen, "<strong>Introducing EncycNet: Creating a Knowledge Graph from German Historical Encyclopedias</strong>", University of Cologne, Germany, MonTalk forum, November 23, 2020.</li>
+      <li>Erik Ketzan, "<strong>Close Reading + Digital Humanities: Some Hows and Whys</strong>", Birkbeck, University of London, UK, April 20, 2018.</li>
+      <li>Erik Ketzan and Christof Schöch, "<strong>Toward a Methodology for Detecting and Classifying Edits in Variants of Fiction. Test Case: Andy Weir's <em>The Martian</em></strong>", Digital Humanities 2017, McGill University &amp; Université de Montréal, Canada, August 11, 2017.</li>
+      <li>Erik Ketzan and Christof Schöch, "<strong>Close/Machine-Reading Two Versions of Andy Weir's <em>The Martian</em></strong>", American Comparative Literature Association Annual Meeting 2017, Utrecht University, Netherlands, July 9, 2017.</li>
+      <li>Erik Ketzan, "<strong>Legal Issues in Digital Humanities: Introduction and Where Things Stand</strong>", UCL Centre for Digital Humanities Seminar Series, UK, May 31, 2017.</li>
+      <li>Erik Ketzan, "<strong>Legal Issues and Language Resources</strong>", LREC 2016 Legal Issues Workshop, Portorož, Slovenia, May 24, 2016.</li>
+      <li>Erik Ketzan, "<strong>Issues in Intellectual Property Enforcement</strong>", Birkbeck School of Law, University of London, invited presentation at Intellectual Property Law module, March 3, 2016.</li>
+      <li>Erik Ketzan, "<strong>Legal Issues in Digital Humanities</strong>", European Summer School in Digital Humanities, University of Leipzig, Germany, July 29, 2015.</li>
+      <li>Erik Ketzan, Jens Stegmann, Andreas Witt, "<strong>Building a Pynchon Corpus: Technical and Legal Issues</strong>", Pynchon Week 2015, Athens, Greece, June 11, 2015.
+        <span class="pub-links"><a href="http://www.ipw2015athens.com/?page_id=34" target="_blank" rel="noopener">Link</a></span>
+      </li>
+      <li>Pawel Kamocki and Erik Ketzan, "<strong>Legal Issues in Sign Language Resources</strong>", CLARIN Workshop: Sign language resources: legal, technical, and crowd-sourcing issues, Hamburg University, Germany, December 13–14, 2014.</li>
+      <li>Erik Ketzan, "<strong>Copyright and Legal Issues at the Institute for the German Language</strong>" (Das Urheberrecht und Rechtliche Fragestellungen am IDS), Institute for the German Language, Mannheim, Germany, November 8, 2014.</li>
+      <li>Erik Ketzan, "<strong>Legal Issues and Language Resources: The Big Picture and What's Happened in the last 2 Years?</strong>", LREC 2014 Legal Issues in Language Resources and Infrastructures Workshop, Reykjavik, Iceland, 27 May 2014.</li>
+      <li>Erik Ketzan, "<strong>Legal Issues in Digital Humanities: a Crash Course</strong>", University of Stuttgart, Germany, February 19, 2014.</li>
+      <li>Pawel Kamocki and Erik Ketzan, "<strong>Preparation of corpora from online and other resources: current state of German and EU law</strong>", 7th Workshop of DFG Scientific Network Empirikom, TU Dortmund University, Germany, February 2014.</li>
+    </ul>
+  </section>
+
+  <!-- COMMITTEES -->
+  <section id="committees">
+    <h2>Committees / Working Groups</h2>
+    <ul class="pub-list">
+      <li>Member, <a href="https://www.clarin.eu/governance/legal-issues-committee" target="_blank" rel="noopener">CLARIN Legal Issues Committee</a></li>
+      <li>Member, <a href="https://www.dariah.eu/activities/working-groups/ethics-and-legality-in-the-digital-arts-and-humanities-eldah/" target="_blank" rel="noopener">DARIAH Working Group ELDAH — Ethics and Legality in the Digital Arts and Humanities</a></li>
+      <li>Member, <a href="https://eadh.org" target="_blank" rel="noopener">The European Association for Digital Humanities (EADH)</a></li>
+      <li>Member, <a href="https://dls.hypotheses.org" target="_blank" rel="noopener">ADHO Special Interest Group in Digital Literary Stylistics (SIG-DLS)</a></li>
+    </ul>
+  </section>
+
+
+</main>
+
+<footer>
+  <p>Erik Ketzan &nbsp;·&nbsp; King's College London &nbsp;·&nbsp; Department of Digital Humanities</p>
+</footer>
+
+</body>
+</html>
